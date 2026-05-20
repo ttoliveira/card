@@ -1,0 +1,8 @@
+# Crawlers (preview WhatsApp, Facebook, etc.)
+/c/:slug /.netlify/functions/og?slug=:slug 200 User-Agent=WhatsApp*
+/c/:slug /.netlify/functions/og?slug=:slug 200 User-Agent=facebookexternalhit*
+/c/:slug /.netlify/functions/og?slug=:slug 200 User-Agent=Twitterbot*
+/c/:slug /.netlify/functions/og?slug=:slug 200 User-Agent=LinkedInBot*
+
+# SPA (deve ficar por último)
+/* /index.html 200

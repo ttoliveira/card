@@ -1,0 +1,1 @@
+-- Use supabase/setup.sql (arquivo completo e atualizado)

@@ -1,0 +1,1 @@
+-- Tudo está em supabase/setup.sql

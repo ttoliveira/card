@@ -1,0 +1,20 @@
+# Ajuste project_id após `supabase link`
+# project_id = "seu-project-id"
+
+[api]
+enabled = true
+
+[functions.create-card]
+verify_jwt = false
+
+[functions.update-card]
+verify_jwt = false
+
+[functions.get-card-public]
+verify_jwt = false
+
+[functions.get-card-edit]
+verify_jwt = false
+
+[functions.upload-card-photo]
+verify_jwt = false
