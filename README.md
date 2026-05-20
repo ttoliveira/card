@@ -21,7 +21,7 @@ cp .env.example .env
 
 Preencha `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
 
-`VITE_APP_URL` — em **produção**, defina com seu domínio (ex: `https://meucartao.vercel.app`) para o preview do WhatsApp e links corretos.
+**Vercel:** não defina `VITE_APP_URL` como `localhost` — remova a variável ou use `https://seu-app.vercel.app`. O app detecta a URL do site automaticamente.
 
 ### Preview no WhatsApp
 

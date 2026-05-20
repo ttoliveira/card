@@ -14,15 +14,47 @@ export function ensureHttpsUrl(url) {
 }
 
 /**
+ * @param {string} url
+ * @returns {boolean}
+ */
+function isLocalhostUrl(url) {
+  try {
+    const { hostname } = new URL(url)
+    return hostname === 'localhost' || hostname === '127.0.0.1'
+  } catch {
+    return false
+  }
+}
+
+/**
+ * URL base do app no navegador (ignora VITE_APP_URL se for localhost em produção).
+ * @returns {string}
+ */
+export function getAppBaseUrl() {
+  const envUrl = import.meta.env.VITE_APP_URL?.trim()
+
+  if (envUrl && !isLocalhostUrl(envUrl)) {
+    return envUrl.replace(/\/$/, '')
+  }
+
+  if (typeof window !== 'undefined') {
+    const origin = window.location.origin
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+    return `${origin}${base}`.replace(/\/$/, '')
+  }
+
+  return envUrl?.replace(/\/$/, '') ?? ''
+}
+
+/**
  * Monta URL pública do cartão.
  * @param {string} slug
  * @returns {string}
  */
 export function getPublicCardUrl(slug) {
-  if (import.meta.env.VITE_APP_URL?.trim()) {
-    return ensureHttpsUrl(`${import.meta.env.VITE_APP_URL.replace(/\/$/, '')}/c/${slug}`)
+  const base = getAppBaseUrl()
+  if (!base) {
+    throw new Error('Link do cartão indisponível.')
   }
-
-  const url = new URL(`c/${slug}`, window.location.origin + import.meta.env.BASE_URL)
-  return ensureHttpsUrl(url.href)
+  return ensureHttpsUrl(`${base}/c/${slug}`)
 }
